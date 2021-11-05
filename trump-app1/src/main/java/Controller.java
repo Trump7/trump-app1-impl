@@ -9,6 +9,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.ResourceBundle;
+
 public class Controller {
 
     @FXML
@@ -45,7 +49,7 @@ public class Controller {
     private TableColumn<?, ?> isCompleted;
 
     @FXML
-    private TableView<?> itemContainer;
+    private TableView<ToDoListData> itemContainer;
 
     @FXML
     private TableColumn<?, ?> itemDate;
@@ -61,6 +65,9 @@ public class Controller {
 
     @FXML
     void addItem(ActionEvent event) {
+        String description = itemDescriptionBox.getText();
+        LocalDate date = itemDateBox.getValue();
+
 
     }
 
@@ -81,7 +88,12 @@ public class Controller {
 
     @FXML
     void removeItem(ActionEvent event) {
+        TableView<ToDoListData> table = new TableView<>();
 
+        buttonRemove.setOnAction(e -> {
+            ToDoListData selectedItem = table.getSelectionModel().getSelectedItem();
+            table.getItems().remove(selectedItem);
+        });
     }
 
     @FXML
@@ -104,4 +116,5 @@ public class Controller {
 
     }
 
+    
 }

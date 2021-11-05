@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <Button fx:id="buttonClear" layoutX="57.0" layoutY="301.0" mnemonicParsing="false" onAction="#clearList" prefHeight="25.0" prefWidth="67.0" text="Clear List" />
       <DatePicker fx:id="itemDateBox" layoutX="405.0" layoutY="344.0" prefHeight="25.0" prefWidth="133.0" />
