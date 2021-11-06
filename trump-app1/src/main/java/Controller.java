@@ -1,5 +1,6 @@
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,6 +21,7 @@ public class Controller implements Initializable {
         isCompleted.setCellValueFactory(new PropertyValueFactory<>("Completed"));
         itemDescription.setCellValueFactory(new PropertyValueFactory<>("Description"));
         itemDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        itemName.setCellValueFactory(new PropertyValueFactory<>("Name"));
 
         itemContainer.setItems(list);
     }
@@ -32,6 +34,12 @@ public class Controller implements Initializable {
 
     @FXML
     private Button buttonAdd;
+
+    @FXML
+    private Button buttonEdit;
+
+    @FXML
+    private Button buttonMark;
 
     @FXML
     private RadioButton buttonAll;
@@ -70,22 +78,36 @@ public class Controller implements Initializable {
     private TableColumn<ToDoListData, String> itemDescription;
 
     @FXML
+    private TableColumn<ToDoListData, String> itemName;
+
+    @FXML
     private DatePicker itemDateBox;
 
     @FXML
     private TextField itemDescriptionBox;
 
+    @FXML
+    private TextField itemNameBox;
+
 
     @FXML
     void addItem(ActionEvent event) {
         String description = itemDescriptionBox.getText();
-        String date = itemDateBox.getValue().toString();
+        String name = itemNameBox.getText();
+        String date;
+        if(itemDateBox.getValue() != null){
+            date = itemDateBox.getValue().toString();
+        }
+        else{
+            date = "";
+        }
 
-        list.add(new ToDoListData(description, date, false));
+        list.add(new ToDoListData(name, description, date, false));
         itemContainer.setItems(list);
 
+        itemNameBox.clear();
         itemDescriptionBox.clear();
-        itemDateBox.getEditor().clear();
+        itemDateBox.setValue(null);
     }
 
     @FXML
@@ -95,7 +117,7 @@ public class Controller implements Initializable {
         alert.setHeaderText("Are you sure you would like to clear the list?");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if(result.get() == ButtonType.OK){
+        if(result.isPresent() && result.get() == ButtonType.OK && itemContainer.getItems() != null){
             itemContainer.getItems().clear();
         }
     }
@@ -114,14 +136,17 @@ public class Controller implements Initializable {
     void removeItem(ActionEvent event) {
         ToDoListData selectedItem = itemContainer.getSelectionModel().getSelectedItem();
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation Needed");
-        alert.setHeaderText("Are you sure you would like to delete the item:");
-        alert.setContentText("Description: " + selectedItem.getDescription() + "\nDate: " + selectedItem.getDate());
+        if(selectedItem != null){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Needed");
+            alert.setHeaderText("Are you sure you would like to delete the item:");
+            alert.setContentText("Name: " + selectedItem.getName() + "\nDescription: "
+                    + selectedItem.getDescription() + "\nDate: " + selectedItem.getDate());
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if(result.get() == ButtonType.OK){
-            itemContainer.getItems().remove(selectedItem);
+            Optional<ButtonType> result = alert.showAndWait();
+            if(result.isPresent() && result.get() == ButtonType.OK){
+                itemContainer.getItems().remove(selectedItem);
+            }
         }
     }
 
@@ -132,17 +157,53 @@ public class Controller implements Initializable {
 
     @FXML
     void showAllItems(ActionEvent event) {
+        FilteredList<ToDoListData> items = new FilteredList<>(list);
 
+        itemContainer.setItems(items);
     }
 
     @FXML
     void showCompleted(ActionEvent event) {
+        FilteredList<ToDoListData> items = new FilteredList<>(list, p -> true);
 
+        items.setPredicate(ToDoListData -> {
+            if(ToDoListData.getCompleted().equals(true)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        });
+
+        itemContainer.setItems(items);
     }
 
     @FXML
     void showIncompleted(ActionEvent event) {
+        FilteredList<ToDoListData> items = new FilteredList<>(list, p -> true);
 
+        items.setPredicate(ToDoListData -> {
+            if(ToDoListData.getCompleted().equals(false)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        });
+
+        itemContainer.setItems(items);
     }
 
+    @FXML
+    void editCompleted(ActionEvent event){
+        ToDoListData selectedItem = itemContainer.getSelectionModel().getSelectedItem();
+
+            if(selectedItem.getCompleted() != null && selectedItem.getCompleted()){
+                selectedItem.setCompleted(false);
+            }
+            else if(selectedItem.getCompleted() != null && !selectedItem.getCompleted()){
+                selectedItem.setCompleted(true);
+            }
+        itemContainer.refresh();
+    }
 }

@@ -1,16 +1,22 @@
-import javafx.scene.control.DatePicker;
-
-import java.time.LocalDate;
-
 public class ToDoListData {
+    private String name;
     private String description;
     private String date;
     private Boolean completed;
 
-    public ToDoListData(String description, String date, Boolean completed) {
+    public ToDoListData(String name, String description, String date, Boolean completed) {
+        this.setName(name);
         this.setDescription(description);
         this.setCompleted(completed);
         this.setDate(date);
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 
     public String getDescription(){

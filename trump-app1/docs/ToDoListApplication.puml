@@ -1,0 +1,44 @@
+@startuml
+
+
+class Controller{
+    -private TableColumn<ToDoListData, Boolean> isCompleted;
+    -private TableView<ToDoListData> itemContainer
+    -private TableColumn<ToDoListData, DatePicker> itemDate
+    -private TableColumn<ToDoListData, String> itemDescription
+    -private TableColumn<ToDoListData, String> itemName
+
+    +addItem()
+    +clearList()
+    +loadList()
+    +openHelp()
+    +removeItem()
+    +saveList()
+    +showAllItems()
+    +showCompleted()
+    +showIncompleted()
+    +editCompleted()
+}
+
+class TodoListApplication{
+    +main(String[] args)
+    +startscene()
+}
+
+class ToDoListData{
+    +ToDoListData()
+    +getName()
+    +setName()
+    +getDescription()
+    +setDescription()
+    +getDate()
+    +setDate()
+    +getCompleted()
+    +setCompleted()
+
+}
+
+TodoListApplication -- Controller
+Controller -- ToDoListData
+
+@enduml

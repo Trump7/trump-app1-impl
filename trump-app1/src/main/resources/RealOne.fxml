@@ -14,33 +14,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="392.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <Button fx:id="buttonClear" layoutX="57.0" layoutY="301.0" mnemonicParsing="false" onAction="#clearList" prefHeight="25.0" prefWidth="67.0" text="Clear List" />
-      <DatePicker fx:id="itemDateBox" layoutX="405.0" layoutY="344.0" prefHeight="25.0" prefWidth="133.0" />
-      <TableView fx:id="itemContainer" layoutX="57.0" layoutY="39.0" prefHeight="223.0" prefWidth="493.0" tableMenuButtonVisible="true">
+      <Button fx:id="buttonClear" layoutX="97.0" layoutY="271.0" mnemonicParsing="false" onAction="#clearList" prefHeight="25.0" prefWidth="67.0" text="Clear List" />
+      <DatePicker fx:id="itemDateBox" layoutX="397.0" layoutY="351.0" prefHeight="25.0" prefWidth="133.0" />
+      <TableView fx:id="itemContainer" layoutX="18.0" layoutY="39.0" prefHeight="223.0" prefWidth="582.0" tableMenuButtonVisible="true">
         <columns>
             <TableColumn fx:id="isCompleted" prefWidth="79.0" text="Completed" />
-          <TableColumn fx:id="itemDescription" prefWidth="326.0" text="Description" />
-          <TableColumn fx:id="itemDate" prefWidth="87.0" text="Date" />
+            <TableColumn fx:id="itemName" minWidth="0.0" prefWidth="105.0" text="Name" />
+          <TableColumn fx:id="itemDescription" prefWidth="297.0" text="Description" />
+          <TableColumn fx:id="itemDate" prefWidth="86.0" text="Date" />
         </columns>
       </TableView>
-      <Text layoutX="131.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Items to View:" wrappingWidth="120.64453125" />
+      <Text layoutX="186.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Items to View:" wrappingWidth="77.0" />
       <Group layoutX="127.0" layoutY="283.0" />
-      <Text layoutX="72.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Items" />
-      <TextField fx:id="itemDescriptionBox" layoutX="141.0" layoutY="344.0" prefHeight="25.0" prefWidth="255.0" />
-      <Text layoutX="141.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" />
-      <Text layoutX="405.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
-      <Button fx:id="buttonAdd" layoutX="538.0" layoutY="344.0" mnemonicParsing="false" onAction="#addItem" prefHeight="25.0" prefWidth="51.0" text="Add" />
-      <RadioButton fx:id="buttonCompleted" layoutX="438.0" layoutY="270.0" mnemonicParsing="false" onAction="#showCompleted" text="Completed Items">
+      <Text layoutX="19.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Items:" />
+      <TextField fx:id="itemDescriptionBox" layoutX="123.0" layoutY="351.0" prefHeight="25.0" prefWidth="265.0" />
+      <Text layoutX="123.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" />
+      <Text layoutX="397.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
+      <Button fx:id="buttonAdd" layoutX="549.0" layoutY="351.0" mnemonicParsing="false" onAction="#addItem" prefHeight="25.0" prefWidth="51.0" text="Add" />
+      <RadioButton fx:id="buttonCompleted" layoutX="490.0" layoutY="303.0" mnemonicParsing="false" onAction="#showCompleted" text="Completed Items">
          <toggleGroup>
             <ToggleGroup fx:id="Group" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="buttonIncompleted" layoutX="303.0" layoutY="270.0" mnemonicParsing="false" onAction="#showIncompleted" text="Incompleted Items" toggleGroup="$Group" />
-      <RadioButton fx:id="buttonAll" layoutX="218.0" layoutY="270.0" mnemonicParsing="false" onAction="#showAllItems" selected="true" text="All Items" toggleGroup="$Group" />
-      <Button fx:id="buttonRemove" layoutX="57.0" layoutY="266.0" mnemonicParsing="false" onAction="#removeItem" prefHeight="25.0" prefWidth="67.0" text="Remove" />
+      <RadioButton fx:id="buttonIncompleted" layoutX="355.0" layoutY="303.0" mnemonicParsing="false" onAction="#showIncompleted" text="Incompleted Items" toggleGroup="$Group" />
+      <RadioButton fx:id="buttonAll" layoutX="270.0" layoutY="303.0" mnemonicParsing="false" onAction="#showAllItems" selected="true" text="All Items" toggleGroup="$Group" />
+      <Button fx:id="buttonRemove" layoutX="19.0" layoutY="271.0" mnemonicParsing="false" onAction="#removeItem" prefHeight="25.0" prefWidth="67.0" text="Remove" />
       <MenuBar layoutX="-4.0" prefHeight="25.0" prefWidth="624.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
@@ -56,5 +56,9 @@
           </Menu>
         </menus>
       </MenuBar>
+      <Button fx:id="buttonEdit" layoutX="173.0" layoutY="271.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Edit Item" />
+      <TextField fx:id="itemNameBox" layoutX="18.0" layoutY="351.0" prefHeight="25.0" prefWidth="96.0" />
+      <Text layoutX="18.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+      <Button fx:id="buttonMark" layoutX="256.0" layoutY="271.0" mnemonicParsing="false" onAction="#editCompleted" prefHeight="25.0" prefWidth="168.0" text="Mark Complete/Incomplete" />
    </children>
 </AnchorPane>
