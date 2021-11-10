@@ -38,7 +38,19 @@ class ToDoListData{
 
 }
 
+class SaveFile{
+    +saveTextToFile()
+    +save()
+}
+
+class LoadFile{
+    +loadTextFromFile()
+    +load()
+}
+
 TodoListApplication -- Controller
 Controller -- ToDoListData
+Controller -- LoadFile
+Controller -- SaveFile
 
 @enduml

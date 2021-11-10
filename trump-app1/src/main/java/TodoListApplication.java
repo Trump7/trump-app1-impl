@@ -13,10 +13,9 @@ public class TodoListApplication extends Application {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("RealOne.fxml")));
 
         Scene scene = new Scene(root);
-        //Uncomment line when style sheet is made
-        //scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
         stage.setResizable(false);
+        //Code for the application displaying
         stage.setTitle("ToDo Application");
         stage.setScene(scene);
         stage.show();
